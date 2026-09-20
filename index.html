@@ -7,9 +7,32 @@
     <style>
         /* CSS: Styling the Grid */
         body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 20px; }
+        /*
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
         .gallery img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .gallery img:hover { transform: scale(1.03); }
+        */
+        .gallery { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px;}
+        .gallery-item { 
+            flex-grow: 1; /* Lets the rows scale fluidly */
+            height: 250px; /* Set the standard target height for your rows */
+            object-fit: contain; /* So the file uses its real aspect ratio */
+            width: auto;
+            min-width: 150px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            z-index: 2; /* Ensures the zoomed item doesn't cut behind others */
+        }
+        
+        /* Optional: Clean fix for the final row so it doesn't over-stretch */
+        .gallery::after {
+            content: "";
+            flex-grow: 99999; /* Acts as an invisible spacer at the end */
+        }
 
         /* CSS: The Lightbox Pop-up Overlay */
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
