@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optic Hell</title>
+    <style>
+        /* CSS: Styling the Grid */
+        body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 20px; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .gallery img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .gallery img:hover { transform: scale(1.03); }
+
+        /* CSS: The Lightbox Pop-up Overlay */
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .lightbox img { max-width: 90%; max-height: 80%; border: 3px solid #fff; }
+    </style>
+</head>
+<body>
+
+    <h1>Optic Hell</h1>
+    
+    <!-- HTML: The Gallery Grid -->
+    <div class="gallery">
+        <img src="./bird.jpg" alt="bird" class="gallery-item">
+        <img src="./dog.jpg" alt="dog" class="gallery-item">
+        <img src="./fashion.jpg" alt="fashion" class="gallery-item">
+        <img src="./market.jpg" alt="market" class="gallery-item">
+        <img src="./reflections.jpg" alt="reflections" class="gallery-item">
+        <img src="./sea.jpg" alt="sea" class="gallery-item">
+        <img src="./shadows.jpg" alt="shadows" class="gallery-item">
+        <img src="./ship.jpg" alt="ship" class="gallery-item">
+        <img src="./soccer.jpg" alt="soccer" class="gallery-item">
+        <img src="./street.jpg" alt="street" class="gallery-item">
+        <img src="./sunset.jpg" alt="sunset" class="gallery-item">
+        <img src="./temple.jpg" alt="temple" class="gallery-item">
+    </div>
+
+    <!-- HTML: The Hidden Lightbox Box -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+
+    <script>
+        // JAVASCRIPT: Making it Interactive
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = document.querySelectorAll('.gallery-item');
+
+        // Open lightbox when a photo is clicked
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+            });
+        });
+
+        // Close lightbox when the dark background is clicked
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
