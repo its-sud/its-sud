@@ -7,45 +7,35 @@
     <style>
         /* CSS: Styling the Grid */
         body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 20px; }
-        /*
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .gallery img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; border-radius: 4px; transition: 0.3s; }
-        .gallery img:hover { transform: scale(1.03); }
-        */
+        
+    /* CSS: Uncropped Masonry Layout */
+    .gallery {
+        /* Creates columns that automatically scale down on smaller screens */
+        column-count: 3;
+        column-gap: 15px;
+        padding: 20px;
+    }
 
-        /* CSS: Dynamic Grid Layout */
-        .gallery {
-            display: grid;
-            /* Creates columns that automatically adjust size to fit the screen */
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            /* The magic setting: automatically packs items tightly into empty gaps */
-            grid-auto-flow: dense; 
-            gap: 15px;
-            padding: 20px;
-        }
+    .gallery-item {
+        /* The magic code for masonry: keeps columns intact */
+        break-inside: avoid;
+        margin-bottom: 15px;
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
 
-        /* The structural wrapper for each photo */
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 6px;
-            height: 220px; /* Standard block height for landscapes */
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+    .gallery-item img {
+        width: 100%;
+        height: auto; /* Let the height adapt completely naturally to the image asset */
+        display: block;
+    }
 
-        /* THE SECRET INGREDIENT: Makes portrait boxes twice as tall */
-        .gallery-item.portrait {
-            grid-row: span 2;
-            height: 455px; /* (220px base * 2 rows) + 15px gap = perfect math */
-        }
-
-        /* Forces the inner image asset to perfectly fill its box without stretching */
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    /* Responsive adjustment for tablets and mobile phones */
+    @media (max-width: 900px) { .gallery { column-count: 2; } }
+    @media (max-width: 600px) { .gallery { column-count: 1; } }
 
         .gallery-item:hover {
             transform: scale(1.02);
@@ -73,6 +63,10 @@
     <!-- HTML: The Gallery Grid -->
     <div class="gallery">
         <div class="gallery-item portrait">
+            <img src="./images/soccer.jpg" alt="soccer" class="gallery-item">
+        </div>
+        
+        <div class="gallery-item portrait">
             <img src="./images/bird.jpg" alt="bird" class="gallery-item">
         </div>
 
@@ -84,11 +78,15 @@
             <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
         </div>
 
-         <div class="gallery-item">
+        <div class="gallery-item maxi">
             <img src="./images/market.jpg" alt="market" class="gallery-item">
-         </div>
+        </div>
         
-         <div class="gallery-item">
+        <div class="gallery-item">
+            <img src="./images/temple.jpg" alt="temple" class="gallery-item">
+        </div>
+
+         <div class="gallery-item maxi">
             <img src="./images/reflections.jpg" alt="reflections" class="gallery-item">
          </div>
         
@@ -96,17 +94,13 @@
             <img src="./images/sea.jpg" alt="sea" class="gallery-item">
          </div>
         
-         <div class="gallery-item">
+         <div class="gallery-item maxi">
             <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
          </div>
         
-         <div class="gallery-item">
+         <div class="gallery-item maxi">
             <img src="./images/ship.jpg" alt="ship" class="gallery-item">
          </div>
-        
-        <div class="gallery-item portrait">
-            <img src="./images/soccer.jpg" alt="soccer" class="gallery-item">
-        </div>
         
         <div class="gallery-item">
             <img src="./images/street.jpg" alt="street" class="gallery-item">
@@ -116,9 +110,6 @@
             <img src="./images/sunset.jpg" alt="sunset" class="gallery-item">
         </div>
         
-        <div class="gallery-item">
-            <img src="./images/temple.jpg" alt="temple" class="gallery-item">
-        </div>
         
     </div>
 
