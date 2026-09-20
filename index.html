@@ -8,39 +8,54 @@
         /* CSS: Styling the Grid */
         body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 20px; }
         
-    /* CSS: Uncropped Masonry Layout */
-    .gallery {
-        /* Creates columns that automatically scale down on smaller screens */
-        column-count: 3;
-        column-gap: 15px;
-        padding: 20px;
-    }
+        /* CSS: Flawless 3-Column Native Grid Masonry */
+        .gallery {
+            display: grid;
+            /* Sets up exactly 3 columns on desktop screens */
+            grid-template-columns: repeat(4, 1fr);
+            /* THE MAGIC KEYWORD: Tells rows to act like an uncropped masonry puzzle */
+            grid-template-rows: masonry;
+            gap: 20px;
+            padding: 20px;
+        }
 
-    .gallery-item {
-        /* The magic code for masonry: keeps columns intact */
-        break-inside: avoid;
-        margin-bottom: 15px;
-        position: relative;
-        border-radius: 6px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-    .gallery-item img {
-        width: 100%;
-        height: auto; /* Let the height adapt completely naturally to the image asset */
-        display: block;
-    }
+        /* THE 2x2 LOOK: Spans exactly 2 columns wide */
+        .gallery-item.featured {
+            grid-column: span 2;
+        }
 
-    /* Responsive adjustment for tablets and mobile phones */
-    @media (max-width: 900px) { .gallery { column-count: 2; } }
-    @media (max-width: 600px) { .gallery { column-count: 1; } }
+        /* THE ABSOLUTE CURE: Images define their own height, preventing all stretching */
+        .gallery-item img {
+            width: 100%;
+            height: auto; 
+            display: block;
+            object-fit: contain; /* Absolutely zero forced cropping or morphing */
+        }
 
         .gallery-item:hover {
             transform: scale(1.02);
             z-index: 5;
         }
+
+        /* Responsive tracks for smaller screens */
+        @media (max-width: 900px) { 
+            .gallery { grid-template-columns: repeat(2, 1fr); } 
+            .gallery-item.featured { grid-column: span 2; } 
+        }
+        @media (max-width: 550px) { 
+            .gallery { grid-template-columns: 1fr; } 
+            .gallery-item.featured { grid-column: span 1; } 
+        }
+
+
 
         /* CSS: The Lightbox Pop-up Overlay */
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000;}
@@ -78,7 +93,7 @@
             <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
         </div>
 
-        <div class="gallery-item maxi">
+        <div class="gallery-item featured">
             <img src="./images/market.jpg" alt="market" class="gallery-item">
         </div>
         
@@ -86,7 +101,7 @@
             <img src="./images/temple.jpg" alt="temple" class="gallery-item">
         </div>
 
-         <div class="gallery-item maxi">
+         <div class="gallery-item featured">
             <img src="./images/reflections.jpg" alt="reflections" class="gallery-item">
          </div>
         
@@ -94,11 +109,11 @@
             <img src="./images/sea.jpg" alt="sea" class="gallery-item">
          </div>
         
-         <div class="gallery-item maxi">
+         <div class="gallery-item featured">
             <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
          </div>
         
-         <div class="gallery-item maxi">
+         <div class="gallery-item featured">
             <img src="./images/ship.jpg" alt="ship" class="gallery-item">
          </div>
         
