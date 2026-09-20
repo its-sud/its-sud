@@ -12,26 +12,44 @@
         .gallery img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .gallery img:hover { transform: scale(1.03); }
         */
-        .gallery { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px;}
-        .gallery-item { 
-            flex-grow: 1; /* Lets the rows scale fluidly */
-            height: 250px; /* Set the standard target height for your rows */
-            object-fit: contain; /* So the file uses its real aspect ratio */
-            width: auto;
-            min-width: 150px;
+
+        /* CSS: Dynamic Grid Layout */
+        .gallery {
+            display: grid;
+            /* Creates columns that automatically adjust size to fit the screen */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            /* The magic setting: automatically packs items tightly into empty gaps */
+            grid-auto-flow: dense; 
+            gap: 15px;
+            padding: 20px;
+        }
+
+        /* The structural wrapper for each photo */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            height: 220px; /* Standard block height for landscapes */
             cursor: pointer;
-            border-radius: 4px;
             transition: transform 0.3s ease;
         }
+
+        /* THE SECRET INGREDIENT: Makes portrait boxes twice as tall */
+        .gallery-item.portrait {
+            grid-row: span 2;
+            height: 455px; /* (220px base * 2 rows) + 15px gap = perfect math */
+        }
+
+        /* Forces the inner image asset to perfectly fill its box without stretching */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .gallery-item:hover {
             transform: scale(1.02);
-            z-index: 2; /* Ensures the zoomed item doesn't cut behind others */
-        }
-        
-        /* Optional: Clean fix for the final row so it doesn't over-stretch */
-        .gallery::after {
-            content: "";
-            flex-grow: 99999; /* Acts as an invisible spacer at the end */
+            z-index: 5;
         }
 
         /* CSS: The Lightbox Pop-up Overlay */
@@ -54,18 +72,54 @@
     
     <!-- HTML: The Gallery Grid -->
     <div class="gallery">
-        <img src="./images/bird.jpg" alt="bird" class="gallery-item">
-        <img src="./images/dog.jpg" alt="dog" class="gallery-item">
-        <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
-        <img src="./images/market.jpg" alt="market" class="gallery-item">
-        <img src="./images/reflections.jpg" alt="reflections" class="gallery-item">
-        <img src="./images/sea.jpg" alt="sea" class="gallery-item">
-        <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
-        <img src="./images/ship.jpg" alt="ship" class="gallery-item">
-        <img src="./images/soccer.jpg" alt="soccer" class="gallery-item">
-        <img src="./images/street.jpg" alt="street" class="gallery-item">
-        <img src="./images/sunset.jpg" alt="sunset" class="gallery-item">
-        <img src="./images/temple.jpg" alt="temple" class="gallery-item">
+        <div class="gallery-item portrait">
+            <img src="./images/bird.jpg" alt="bird" class="gallery-item">
+        </div>
+
+        <div class="gallery-item portrait">
+            <img src="./images/dog.jpg" alt="dog" class="gallery-item">
+        </div>
+
+        <div class="gallery-item portrait">
+            <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
+        </div>
+
+         <div class="gallery-item">
+            <img src="./images/market.jpg" alt="market" class="gallery-item">
+         </div>
+        
+         <div class="gallery-item">
+            <img src="./images/reflections.jpg" alt="reflections" class="gallery-item">
+         </div>
+        
+         <div class="gallery-item">
+            <img src="./images/sea.jpg" alt="sea" class="gallery-item">
+         </div>
+        
+         <div class="gallery-item">
+            <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
+         </div>
+        
+         <div class="gallery-item">
+            <img src="./images/ship.jpg" alt="ship" class="gallery-item">
+         </div>
+        
+        <div class="gallery-item portrait">
+            <img src="./images/soccer.jpg" alt="soccer" class="gallery-item">
+        </div>
+        
+        <div class="gallery-item">
+            <img src="./images/street.jpg" alt="street" class="gallery-item">
+        </div>
+        
+        <div class="gallery-item portrait">
+            <img src="./images/sunset.jpg" alt="sunset" class="gallery-item">
+        </div>
+        
+        <div class="gallery-item">
+            <img src="./images/temple.jpg" alt="temple" class="gallery-item">
+        </div>
+        
     </div>
 
     <!-- HTML: The Hidden Lightbox Box -->
@@ -79,27 +133,26 @@
     </footer>
     
     <script>
-        // JAVASCRIPT: Making it Interactive
+
+        // JAVASCRIPT: Lightbox click adjustment
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const images = document.querySelectorAll('.gallery-item');
+        const galleryItems = document.querySelectorAll('.gallery-item');
 
-        // Open lightbox when a photo is clicked
-        images.forEach(img => {
-            img.addEventListener('click', () => {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img'); // Finds the image inside the clicked div
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;
             });
         });
 
-        // Close lightbox when the dark background is clicked
         lightbox.addEventListener('click', () => {
             lightbox.style.display = 'none';
         });
 
-        // Automatically set the current calendar year
-        const yearSpan = document.getElementById('year');
-        yearSpan.textContent = new Date().getFullYear();
+        // Copyright year auto-update
+        document.getElementById('year').textContent = new Date().getFullYear();
 
     </script>
 </body>
