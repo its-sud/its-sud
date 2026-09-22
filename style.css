@@ -1,0 +1,198 @@
+/* ==========================================================================
+   1. GLOBAL STYLES & RESET
+   ========================================================================== */
+body { 
+    font-family: sans-serif; 
+    background: #111; 
+    color: #fff; 
+    margin: 0; 
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. STABLE 4-COLUMN GALLERY GRID
+   ========================================================================== */
+.gallery {
+    display: grid;
+    /* Sets up exactly 4 equal columns on desktop viewports */
+    grid-template-columns: repeat(4, 1fr);
+
+    /* Automatically packs portrait and landscape blocks tightly into empty slots */
+    grid-auto-flow: dense; 
+    gap: 15px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* THE PORTRAIT RULE: Spans 1 column wide, 2 rows vertically down */
+.gallery-item.portrait {
+    grid-column: span 1;
+    grid-row: span 2;
+    background: #161616; /* Dark background frame handles portrait side padding */
+}
+
+/* PORTRAIT IMAGE PROTECTION: Guarantees 0% cropping for vertical shots */
+.gallery-item.portrait img {
+    object-fit: contain !important; /* Preserves your exact composition data */
+}
+
+/* THE FEATURED LANDSCAPE: Spans 3 columns wide, 2 rows high */
+.gallery-item.featured {
+    grid-column: span 3; 
+    grid-row: span 3; 
+    background: #161616; /* Dark background frame handles featured side padding */
+}
+
+/* FEATURED IMAGE PROTECTION: Guarantees 0% cropping for your hero shots */
+.gallery-item.featured img {
+    object-fit: contain !important; 
+}
+
+/* STANDARD IMAGE RULES */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps standard horizontal background images fitting flush */
+    display: block;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+/* ==========================================================================
+   3. INTERACTIVE SMOOTH HOVER CAPTIONS
+   ==========================================================================
+.caption-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.gallery-item:hover .caption-overlay {
+    opacity: 1;
+}
+
+.caption-overlay h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.caption-overlay p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #ccc;
+    letter-spacing: 0.5px;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .caption-overlay h3,
+.gallery-item:hover .caption-overlay p {
+    transform: translateY(0);
+}
+*/
+
+/* Item Details ========================================================================== */
+.item-details {
+    padding: 12px 5px 5px 5px; /* Clean breathing room below the asset frame */
+    box-sizing: border-box;
+}
+
+/* Elegant framing header text */
+.item-details h3 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+/* Subtle, muted subtext caption */
+.item-details p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #888; /* Soft gray so it stays visually secondary to the title */
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   4. LIGHTBOX POP-UP OVERLAY
+   ========================================================================== */
+.lightbox { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.9); 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000;
+}
+
+.lightbox img { 
+    max-width: 90%; 
+    max-height: 80%; 
+    border: 3px solid #fff; 
+}
+
+/* ==========================================================================
+   5. MINIMALIST FOOTER & COPYRIGHT NOTICE
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.85rem;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) { 
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .gallery-item.featured { grid-column: span 3; }
+}
+
+@media (max-width: 768px) { 
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; } 
+    .gallery-item.featured { grid-column: span 2; }
+}
+
+@media (max-width: 480px) { 
+    .gallery { grid-template-columns: 1fr; grid-auto-rows: 180px; } 
+    .gallery-item.portrait,
+    .gallery-item.featured { 
+        grid-column: span 1; 
+        grid-row: span 1; 
+    }
+}

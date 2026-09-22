@@ -4,72 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optic Hell</title>
-    <style>
-        /* CSS: Styling the Grid */
-        body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 20px; }
-        
-        /* CSS: Flawless 3-Column Native Grid Masonry */
-        .gallery {
-            display: grid;
-            /* Sets up exactly 3 columns on desktop screens */
-            grid-template-columns: repeat(4, 1fr);
-            /* THE MAGIC KEYWORD: Tells rows to act like an uncropped masonry puzzle */
-            grid-template-rows: masonry;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        /* THE 2x2 LOOK: Spans exactly 2 columns wide */
-        .gallery-item.featured {
-            grid-column: span 2;
-        }
-
-        /* THE ABSOLUTE CURE: Images define their own height, preventing all stretching */
-        .gallery-item img {
-            width: 100%;
-            height: auto; 
-            display: block;
-            object-fit: contain; /* Absolutely zero forced cropping or morphing */
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
-            z-index: 5;
-        }
-
-        /* Responsive tracks for smaller screens */
-        @media (max-width: 900px) { 
-            .gallery { grid-template-columns: repeat(2, 1fr); } 
-            .gallery-item.featured { grid-column: span 2; } 
-        }
-        @media (max-width: 550px) { 
-            .gallery { grid-template-columns: 1fr; } 
-            .gallery-item.featured { grid-column: span 1; } 
-        }
-
-
-
-        /* CSS: The Lightbox Pop-up Overlay */
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000;}
-        .lightbox img { max-width: 90%; max-height: 80%; border: 3px solid #fff; }
-
-        /* CSS: Clean Minimalist Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.85rem;
-            color: #666; /* Subtle muted gray so it doesn't distract from your art */
-            letter-spacing: 1px;
-        }
-    </style>
+    <!-- HTML: Link to the external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -78,53 +14,100 @@
     <!-- HTML: The Gallery Grid -->
     <div class="gallery">
         <div class="gallery-item portrait">
-            <img src="./images/soccer.jpg" alt="soccer" class="gallery-item">
+            <img src="./images/soccer.jpg" alt="A boy playing football in the street at night" class="gallery-item">
+            <div class="item-details">
+                <h3>Goal!</h3>
+                <p>Messina, Italy</p>
+            </div>
         </div>
         
+        <div class="gallery-item featured">
+            <img src="./images/market.jpg" alt="A lady going for shopping in the market early in the morning" class="gallery-item">
+            <div class="item-details">
+                <h3>Early Morning</h3>
+                <p>Venice, Italy</p>
+            </div>
+        </div>
+
         <div class="gallery-item portrait">
             <img src="./images/bird.jpg" alt="bird" class="gallery-item">
+            <div class="item-details">
+                <h3>Take off</h3>
+                <p>Assam, India</p>
+            </div>
         </div>
 
-        <div class="gallery-item portrait">
-            <img src="./images/dog.jpg" alt="dog" class="gallery-item">
-        </div>
-
-        <div class="gallery-item portrait">
-            <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
-        </div>
-
-        <div class="gallery-item featured">
-            <img src="./images/market.jpg" alt="market" class="gallery-item">
+        <div class="gallery-item">
+            <img src="./images/sea.jpg" alt="sea" class="gallery-item">
+            <div class="item-details">
+                <h3>Calm Sea</h3>
+                <p>Agrigento, Italy</p>
+            </div>
         </div>
         
         <div class="gallery-item">
             <img src="./images/temple.jpg" alt="temple" class="gallery-item">
+            <div class="item-details">
+                <h3>Temple on Hill</h3>
+                <p>Agrigento, Italy</p>
+            </div>
         </div>
 
-         <div class="gallery-item featured">
+        <div class="gallery-item featured">
             <img src="./images/reflections.jpg" alt="reflections" class="gallery-item">
-         </div>
-        
-         <div class="gallery-item">
-            <img src="./images/sea.jpg" alt="sea" class="gallery-item">
-         </div>
-        
-         <div class="gallery-item featured">
-            <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
-         </div>
-        
-         <div class="gallery-item featured">
-            <img src="./images/ship.jpg" alt="ship" class="gallery-item">
-         </div>
-        
-        <div class="gallery-item">
-            <img src="./images/street.jpg" alt="street" class="gallery-item">
+            <div class="item-details">
+                <h3>Reflections</h3>
+                <p>Venice, Italy</p>
+            </div>
+        </div>
+                    
+        <div class="gallery-item portrait">
+            <img src="./images/sunset.jpg" alt="sunset" class="gallery-item">
+            <div class="item-details">
+                <h3>Sun Goes Down</h3>
+                <p>Agrigento, Italy</p>
+            </div>
         </div>
         
         <div class="gallery-item portrait">
-            <img src="./images/sunset.jpg" alt="sunset" class="gallery-item">
+            <img src="./images/dog.jpg" alt="dog" class="gallery-item">
+            <div class="item-details">
+                <h3>Clever Dog</h3>
+                <p>Messina, Italy</p>
+            </div>
+        </div>
+
+        <div class="gallery-item featured">
+            <img src="./images/shadows.jpg" alt="shadows" class="gallery-item">
+            <div class="item-details">
+                <h3>Empty Markets</h3>
+                <p>Venice, Italy</p>
+            </div>
+        </div>
+    
+        <div class="gallery-item portrait">
+            <img src="./images/fashion.jpg" alt="fashion" class="gallery-item">
+            <div class="item-details">
+                <h3>Window Shopping</h3>
+                <p>Milan, Italy</p>
+            </div>
+        </div>
+
+        <div class="gallery-item featured">
+            <img src="./images/ship.jpg" alt="ship" class="gallery-item">
+            <div class="item-details">
+                <h3>Ship Sails</h3>
+                <p>Strait of Messina, Italy</p>
+            </div>
         </div>
         
+        <div class="gallery-item featured">
+            <img src="./images/street.jpg" alt="street" class="gallery-item">
+            <div class="item-details">
+                <h3>Patience</h3>
+                <p>Budapest, Hungary</p>
+            </div>
+        </div>
         
     </div>
 
@@ -135,31 +118,11 @@
     
     <!-- HTML: Footer section at the bottom -->
     <footer>
-        <p>&copy; <span id="year"></span> Optic Hell Photography. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Optic Hell. All rights reserved.</p>
     </footer>
     
-    <script>
+    <!-- HTML: Link to the external JavaScript file -->
+    <script src="script.js"></script>
 
-        // JAVASCRIPT: Lightbox click adjustment
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img'); // Finds the image inside the clicked div
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
-            });
-        });
-
-        lightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-        });
-
-        // Copyright year auto-update
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-    </script>
 </body>
 </html>
